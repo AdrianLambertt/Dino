@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+Background for widgets to make the rounded corners based on the
+appWidgetRadius attribute value
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="16dp" />
+    <solid android:color="#55000000"/>
+</shape>

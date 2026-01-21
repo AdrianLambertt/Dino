@@ -1,0 +1,39 @@
+<!--TODO
+WAATER REMIND PUSH NOTIFS
+GOOD MORNING
+GOOD AFTERNOON
+GOOD EVENING
+WHOLESOME NOTIFS
+PHOTOS OF US
+-->
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/widget_bg"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
+
+    <ImageView
+        android:id="@+id/widgetImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:contentDescription="TODO"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/widgetGreeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="serif-monospace"
+        android:layout_gravity="bottom|center_horizontal"/>
+
+</FrameLayout>

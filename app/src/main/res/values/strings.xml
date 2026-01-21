@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Dino</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+    <string name="settings">Settings Back</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="push_notification_header">Push Notifications</string>
+
+<!--    Push Notification Preferences -->
+    <string name="drink_water_notifications">Drink notifications</string>
+    <string name="drink_water_summary_off">Braving the thirsty world solo</string>
+    <string name="drink_water_summary_on">Collaborating with hydration headquarters</string>
+    <string name="appreciation_notifications">Appreciation notifications</string>
+    <string name="appreciation_summary_off">No lovin\' in this ruthless world..</string>
+    <string name="appreciation_summary_on">Send appreciation notifications</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+</resources>

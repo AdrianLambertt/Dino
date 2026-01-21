@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/values-night/colors.xml -->
+<resources>
+        <!-- Backgrounds -->
+        <color name="background_main">#121212</color>
+        <color name="background_card">#1E1E1E</color>
+        <color name="background_card_dark">#2E2E2E</color>
+
+        <!-- Text -->
+        <color name="text_primary">#E0E0E0</color>
+        <color name="text_secondary">#A0A0A0</color>
+
+    <!-- Icons -->
+    <color name="icon_primary">#E0E0E0</color>
+
+</resources>
