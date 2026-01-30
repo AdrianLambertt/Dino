@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
     private fun configureHydrationButtons() {
         val buttonAdd = findViewById<Button>(R.id.hydrationAddSip)
         buttonAdd.setOnClickListener {
-            SoundPlayer.playDropSound(this)
+            SoundPlayer.playPlusDropSound(this)
             lifecycleScope.launch {
                 applicationContext.addSip()
             }
@@ -95,6 +95,7 @@ class MainActivity : AppCompatActivity() {
 
         val buttonMinus = findViewById<Button>(R.id.hydrationMinusSip)
         buttonMinus.setOnClickListener {
+            SoundPlayer.playMinusDropSound(this)
             lifecycleScope.launch {
                 applicationContext.minusSip()
             }
