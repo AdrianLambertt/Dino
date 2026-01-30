@@ -12,15 +12,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import com.adrianlambertt.dino.hydration.addSip
-import com.adrianlambertt.dino.hydration.minusSip
 import com.adrianlambertt.dino.hydration.getHydrationState
-import com.adrianlambertt.dino.views.WaterBottleView
 import com.adrianlambertt.dino.hydration.hydrationDataStore
+import com.adrianlambertt.dino.hydration.minusSip
+import com.adrianlambertt.dino.views.WaterBottleView
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
                 Log.d("Permissions", "Notification permission denied")
             }
         }
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,7 +78,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun configureSettingsButton() {
         val button = findViewById<ImageButton>(R.id.settingsButton)
-        button.setOnClickListener{
+        button.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
@@ -87,14 +86,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun configureHydrationButtons() {
         val buttonAdd = findViewById<Button>(R.id.hydrationAddSip)
-        buttonAdd.setOnClickListener{
+        buttonAdd.setOnClickListener {
+            SoundPlayer.playDropSound(this)
             lifecycleScope.launch {
                 applicationContext.addSip()
             }
         }
 
         val buttonMinus = findViewById<Button>(R.id.hydrationMinusSip)
-        buttonMinus.setOnClickListener{
+        buttonMinus.setOnClickListener {
             lifecycleScope.launch {
                 applicationContext.minusSip()
             }
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun configureDinoWisdomRefresh() {
         val button = findViewById<Button>(R.id.dinoWisdomRefresh)
-        button.setOnClickListener{
+        button.setOnClickListener {
             resetDinoWisdom()
         }
     }
@@ -146,19 +146,3 @@ class MainActivity : AppCompatActivity() {
         return wisdom.random()
     }
 }
-
-
-//val hydrationFlow: Flow<HydrationState> =
-//    context.hydrationDataStore.data.map { prefs ->
-//
-//        val today = LocalDate.now().toEpochDay()
-//
-//        val goal = prefs[HydrationKeys.GOAL_SIPS] ?: DEFAULT_GOAL_SIPS
-//        val lastUpdated = prefs[HydrationKeys.LAST_UPDATED_DAY] ?: today
-//
-//        val current =
-//            if (lastUpdated != today) 0
-//            else prefs[HydrationKeys.CURRENT_SIPS] ?: 0
-//
-//        HydrationState(current, goal, today)
-//    }

@@ -1,15 +1,20 @@
 package com.adrianlambertt.dino.workers
+
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.preference.PreferenceManager
+import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import com.adrianlambertt.dino.MainActivity
 import com.adrianlambertt.dino.R
 import com.adrianlambertt.dino.utils.getRandomDelay
 import java.util.concurrent.TimeUnit
@@ -47,15 +52,28 @@ class WaterReminderWorker(
     }
 
     private fun scheduleNext(context: Context) {
-        val request = OneTimeWorkRequestBuilder<WaterReminderWorker>()
-            .setInitialDelay(getRandomDelay(120, 240), TimeUnit.MINUTES)
-            .build()
-
-        WorkManager.getInstance(context).enqueue(request)
+        WorkManager.getInstance(context)
+            .enqueueUniqueWork(
+                "waterReminder",
+                ExistingWorkPolicy.REPLACE,
+                OneTimeWorkRequestBuilder<WaterReminderWorker>()
+                    .setInitialDelay(getRandomDelay(120, 240), TimeUnit.MINUTES)
+                    .build()
+            )
     }
 
     private fun showNotification(context: Context, title: String, text: String) {
         val channelId = "dino_notifications"
+
+        val intent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+            context, 0, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -64,7 +82,7 @@ class WaterReminderWorker(
             val channel = NotificationChannel(
                 channelId,
                 "Dino Notifications",
-                NotificationManager.IMPORTANCE_HIGH
+                NotificationManager.IMPORTANCE_DEFAULT
             )
             notificationManager.createNotificationChannel(channel)
         }
@@ -73,6 +91,7 @@ class WaterReminderWorker(
             .setContentTitle(title)
             .setContentText(text)
             .setSmallIcon(R.drawable.notification_icon)
+            .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .build()
 

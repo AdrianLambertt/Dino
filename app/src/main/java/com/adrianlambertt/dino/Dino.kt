@@ -19,15 +19,19 @@ class Dino : Application() {
     private fun scheduleNotifications() {
         Log.d("MainActivity", "Scheduling Notifications")
         WorkManager.getInstance(this)
-            .enqueueUniqueWork("waterReminder", ExistingWorkPolicy.REPLACE,
+            .enqueueUniqueWork(
+                "waterReminder", ExistingWorkPolicy.REPLACE,
                 OneTimeWorkRequestBuilder<WaterReminderWorker>()
-                .setInitialDelay(getRandomDelay(120, 240), TimeUnit.MINUTES)
-                .build())
+                    .setInitialDelay(getRandomDelay(120, 240), TimeUnit.MINUTES)
+                    .build()
+            )
 
         WorkManager.getInstance(this)
-            .enqueueUniqueWork("motivationReminder", ExistingWorkPolicy.REPLACE,
+            .enqueueUniqueWork(
+                "motivationReminder", ExistingWorkPolicy.REPLACE,
                 OneTimeWorkRequestBuilder<MotivationReminderWorker>()
-                .setInitialDelay(getRandomDelay(240, 480), TimeUnit.MINUTES)
-                .build())
+                    .setInitialDelay(getRandomDelay(240, 480), TimeUnit.MINUTES)
+                    .build()
+            )
     }
 }
